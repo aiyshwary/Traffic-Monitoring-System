@@ -1,3 +1,9 @@
+<?php
+session_start();
+	include("aconnection.php");
+	include("ofunctions.php");
+	$user_data = check_login($con);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

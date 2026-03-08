@@ -94,7 +94,7 @@ session_start();
                   <h5>TRAFFIC MONITORING SYSTEM</h5>
                     <a href="ofine.php" class="main-stroked-button">Fine Allotment</a>
                     <a href="osignalling.php" class="main-stroked-button">edit signal timings</a>
-                    <a href="https://www.google.co.google in/maps/" class="main-stroked-button">google maps</a>
+                    <a href="https://www.google.co.in/maps/" class="main-stroked-button">google maps</a>
                     <a href="oroad.php" class="main-stroked-button">road info</a>
                 </div>
             </div>
@@ -106,10 +106,10 @@ session_start();
                 <img src="assets/images/b.jpg" alt="">
                 <div class="text-content">
                     <h3>Welcome To TMS</h3>
-                    <h5>TRAFFIC MONITORINGM SYSTEM</h5>
+                    <h5>TRAFFIC MONITORING SYSTEM</h5>
                     <a href="ofine.php" class="main-stroked-button">Fine Allotment</a>
                     <a href="osignalling.php" class="main-stroked-button">edit signal timings</a>
-                    <a href="https://www.google.co.google in/maps/" class="main-stroked-button">google maps</a>
+                    <a href="https://www.google.co.in/maps/" class="main-stroked-button">google maps</a>
                     <a href="oroad.php" class="main-stroked-button">road info</a>
                   </div>
             </div>
@@ -121,10 +121,10 @@ session_start();
                 <img src="assets/images/c.jpg" alt="">
                 <div class="text-content">
                     <h3>Welcome To TMS</h3>
-                    <h5>TRAFFIC MONITORINGM SYSTEM</h5>
+                    <h5>TRAFFIC MONITORING SYSTEM</h5>
                     <a href="ofine.php" class="main-stroked-button">Fine Allotment</a>
                     <a href="osignalling.php" class="main-stroked-button">edit signal timings</a>
-                    <a href="https://www.google.co.google in/maps/" class="main-stroked-button">google maps</a>
+                    <a href="https://www.google.co.in/maps/" class="main-stroked-button">google maps</a>
                     <a href="oroad.php" class="main-stroked-button">road info</a>
                   </div>
             </div>

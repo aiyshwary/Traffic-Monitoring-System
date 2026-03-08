@@ -1,3 +1,9 @@
+<?php
+session_start();
+	include("aconnection.php");
+	include("cfunctions.php");
+	$user_data = check_login($con);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,9 +87,12 @@
 						<table>
 							<thead>
 								<tr class="row100 head">
-									<th class="cell100 column1">Road Name</th>
-									<th class="cell100 column3">Time from</th>
-									<th class="cell100 column4">Time to</th>
+									<th class="cell100 column1">Sl.no</th>
+									<th class="cell100 column3">Name</th>
+									<th class="cell100 column3">VID</th>
+									<th class="cell100 column3">Amount (&#8377;)</th>
+									<th class="cell100 column3">Status</th>
+									<th class="cell100 column3"><a href="chome.php">GO TO HOME PAGE</a></th>
 								</tr>
 							</thead>
 						</table>
@@ -93,35 +102,35 @@
 						<table>
 							<tbody>
                             <?php
-                            include("aconnection.php");                        
-                            $sql = "SELECT * FROM signalling";
-                            $res = mysqli_query($con,$sql);                       
-                            $count = mysqli_num_rows($res);                        
+                            $username = $user_data['username'];
+                            $sql = "SELECT * FROM fine WHERE username='$username'";
+                            $res = mysqli_query($con,$sql);
+                            $count = mysqli_num_rows($res);
                             $sn = 1;
                             if($count > 0)
                             {
-                                
                                 while($row = mysqli_fetch_assoc($res))
                                 {
-                                    $name = $row['road_name'];
-                                    $from = $row['time_from'];
-                                    $to = $row['time_to'];
+                                    $status = ($row['paid'] == 1) ? 'Paid' : 'Pending';
+                                    $action = ($row['paid'] == 0)
+                                        ? '<a href="cpayment.php?id='.$row['id'].'">Pay Now</a>'
+                                        : '-';
                                     ?>
                                         <tr class="alert" role="alert">
-                                            <td class="cell100 column1"><?php echo $name; ?>.</td> 
-                                            <td class="cell100 column3"><?php echo $from; ?></td>
-                                            <td class="cell100 column4"><?php echo $to; ?></td>                  
+                                            <td class="cell100 column1"><?php echo $sn++; ?></td>
+                                            <td class="cell100 column3"><?php echo htmlspecialchars($row['username']); ?></td>
+                                            <td class="cell100 column3"><?php echo htmlspecialchars($row['VID']); ?></td>
+                                            <td class="cell100 column3"><?php echo htmlspecialchars($row['amount']); ?></td>
+                                            <td class="cell100 column3"><?php echo $status; ?></td>
+                                            <td class="cell100 column3"><?php echo $action; ?></td>
                                         </tr>
                                     <?php
                                 }
                             }
                             else
                             {
-                                
-                                echo "<tr><td colspan='7' class='error'>Book Not Added Yet</td></tr>";
-                                
+                                echo "<tr><td colspan='6' class='error'>No fine records found.</td></tr>";
                             }
-
                             ?>
 							</tbody>
 						</table>

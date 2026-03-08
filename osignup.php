@@ -10,7 +10,7 @@ session_start();
 		//something was posted
 		$username = $_POST['username'];
 		$email = $_POST['email'];
-		$OID = $_POST[')ID'];
+		$OID = $_POST['OID'];
 		$pass = $_POST['pass'];
 
 		if(!empty($email) && !empty($pass) && !is_numeric($email))

@@ -1,7 +1,7 @@
 <?php 
 session_start();
 	include("aconnection.php");
-	include("cfunctions.php");
+	include("ofunctions.php");
     $id = $_GET['id'];
 
     $qry = mysqli_query($con,"select * from fine where id='$id'");
@@ -10,9 +10,9 @@ session_start();
 
     if(isset($_POST['update'])) 
     {
-        $time_from = $_POST['amount'];
+        $amount = $_POST['amount'];
         
-        $edit = mysqli_query($con,"update fine set amount ='$amount'");
+        $edit = mysqli_query($con,"update fine set amount ='$amount' where id='$id'");
         
         if($edit)
         {

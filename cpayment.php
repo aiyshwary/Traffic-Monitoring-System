@@ -1,3 +1,27 @@
+<?php
+session_start();
+	include("aconnection.php");
+	include("cfunctions.php");
+	$user_data = check_login($con);
+
+	$fine_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+	$fine_data = null;
+	if($fine_id > 0) {
+		$res = mysqli_query($con, "SELECT * FROM fine WHERE id='$fine_id' AND username='" . $user_data['username'] . "'");
+		if($res && mysqli_num_rows($res) > 0) {
+			$fine_data = mysqli_fetch_assoc($res);
+		}
+	}
+
+	if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['pay'])) {
+		$pay_id = intval($_POST['fine_id']);
+		$sql = "UPDATE fine SET paid=1 WHERE id='$pay_id' AND username='" . $user_data['username'] . "'";
+		if(mysqli_query($con, $sql)) {
+			header("Location: cfine.php?payment=success");
+			die;
+		}
+	}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -111,6 +135,21 @@ span.price {
 </head>
 <body>
 
+<?php if(isset($_GET['payment']) && $_GET['payment'] == 'success'): ?>
+  <p style="color:green; text-align:center; padding:30px; font-size:20px;">
+    &#10003; Payment successful! Your fine has been marked as paid.
+    <a href="cfine.php">View Fines</a>
+  </p>
+<?php else: ?>
+
+<div style="max-width:700px; margin:50px auto; padding:20px;">
+  <?php if($fine_data): ?>
+    <p style="text-align:center; font-size:18px;">
+      <strong>Fine Amount Due: &#8377;<?php echo htmlspecialchars($fine_data['amount']); ?></strong>
+    </p>
+  <?php endif; ?>
+  <form method="post" action="cpayment.php<?php echo $fine_id ? '?id='.$fine_id : ''; ?>">
+    <input type="hidden" name="fine_id" value="<?php echo $fine_id; ?>">
 
           <div class="col-50">
             <h3>Payment</h3>
@@ -141,14 +180,12 @@ span.price {
           
         </div>
         <label>
-          <input type="checkbox" checked="checked" name="sameadr"> Share payment recipt
+          <input type="checkbox" checked="checked" name="sameadr"> Share payment receipt
         </label>
-        <input type="submit" value="Continue to checkout" class="btn">
+        <input type="submit" name="pay" value="Continue to checkout" class="btn">
       </form>
-    </div>
-  </div>
-
 </div>
+<?php endif; ?>
 
 </body>
 </html>
